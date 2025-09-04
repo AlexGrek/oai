@@ -1,4 +1,7 @@
+import asyncio
+import json
 import logging
+import re
 from engine.apiclient import BackendAPIClient
 from engine.model_picker import ModelPicker
 from engine.pipelines.models import *
@@ -25,7 +28,7 @@ class PipelineExecutor:
         Runs the entire pipeline with a given initial input.
         """
         self.context = {"input": initial_input}
-        logging.debug(
+        logging.info(
             f"🚀 Starting pipeline '{self.pipeline.name}' with input: {initial_input}\n"
         )
 
@@ -40,11 +43,11 @@ class PipelineExecutor:
             if step.action == "query":
                 await self._execute_query_step(step)
             else:
-                logging.debug(f"⚠️ Unknown action: {step.action}")
+                logging.warning(f"⚠️ Unknown action: {step.action}")
 
             logging.debug("Step finished.\n")
 
-        logging.debug("✅ Pipeline execution complete.")
+        logging.info("✅ Pipeline execution complete.")
         return self.context
 
     async def _execute_query_step(self, step: Step):
@@ -96,7 +99,7 @@ class PipelineExecutor:
             try:
                 data_to_parse = json.loads(response)
             except json.JSONDecodeError:
-                logging.debug(f"⚠️ Failed to parse JSON response: {response}")
+                logging.error(f"⚠️ Failed to parse JSON response: {response}")
                 return
 
         for rule in rules:
