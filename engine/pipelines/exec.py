@@ -1,8 +1,10 @@
+import logging
 from engine.apiclient import BackendAPIClient
 from engine.model_picker import ModelPicker
 from engine.pipelines.models import *
 from engine.pipelines.query_send import QuerySender
 
+logger = logging.getLogger(__name__)
 
 class PipelineExecutor:
     """
@@ -23,26 +25,26 @@ class PipelineExecutor:
         Runs the entire pipeline with a given initial input.
         """
         self.context = {"input": initial_input}
-        print(
+        logging.debug(
             f"🚀 Starting pipeline '{self.pipeline.name}' with input: {initial_input}\n"
         )
 
         for i, step in enumerate(self.pipeline.steps):
-            print(f"--- Step {i+1}: Action '{step.action}' ---")
+            logging.debug(f"--- Step {i+1}: Action '{step.action}' ---")
 
             should_run = await self._evaluate_conditions(step.if_condition)
             if not should_run:
-                print("Skipped due to 'if' condition not being met.\n")
+                logging.debug("Skipped due to 'if' condition not being met.\n")
                 continue
 
             if step.action == "query":
                 await self._execute_query_step(step)
             else:
-                print(f"⚠️ Unknown action: {step.action}")
+                logging.debug(f"⚠️ Unknown action: {step.action}")
 
-            print("Step finished.\n")
+            logging.debug("Step finished.\n")
 
-        print("✅ Pipeline execution complete.")
+        logging.debug("✅ Pipeline execution complete.")
         return self.context
 
     async def _execute_query_step(self, step: Step):
@@ -94,7 +96,7 @@ class PipelineExecutor:
             try:
                 data_to_parse = json.loads(response)
             except json.JSONDecodeError:
-                print(f"⚠️ Failed to parse JSON response: {response}")
+                logging.debug(f"⚠️ Failed to parse JSON response: {response}")
                 return
 
         for rule in rules:

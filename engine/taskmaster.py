@@ -1,3 +1,4 @@
+import logging
 from typing import Any
 
 from fastapi import Depends
@@ -7,6 +8,7 @@ from engine.pipelines.exec import PipelineExecutor
 from engine.pipelines.query_send import QuerySender
 from storage.pipelines import PipelineStorage
 
+logger = logging.getLogger(__name__)
 
 class Taskmaster:
     def __init__(self, backend_api_client: BackendAPIClient, storage_config: Any):

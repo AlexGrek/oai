@@ -1,7 +1,6 @@
 from typing import Any, Dict, Optional
 from engine.apiclient import BackendAPIClient
 from engine.model_picker import ModelPicker
-from engine.pipelines.models import Step
 
 
 class QuerySender:
