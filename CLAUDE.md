@@ -4,25 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-**Run the server:**
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-**Run the test script:**
-```bash
-python testme.py
-```
-
-**Format code:**
-```bash
-black .
-```
-
-**Install dependencies:**
-```bash
-pdm install
-```
+| Command | Description |
+|---|---|
+| `task run` | Start the FastAPI server |
+| `task dev` | Start with auto-reload |
+| `task test` | Run the integration test script |
+| `task fmt` | Format code with black |
+| `task install` | Install all dependencies |
 
 **Add a dependency:**
 ```bash

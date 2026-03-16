@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(pdm init:*)",
-      "Bash(pdm add:*)"
+      "Bash(pdm add:*)",
+      "Bash(task --version)"
     ]
   }
 }

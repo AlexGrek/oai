@@ -1,0 +1,22 @@
+version: '3'
+
+tasks:
+  run:
+    desc: Start the FastAPI server
+    cmd: pdm run uvicorn main:app --host 0.0.0.0 --port 8000
+
+  dev:
+    desc: Start the server with auto-reload
+    cmd: pdm run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  test:
+    desc: Run the integration test script
+    cmd: pdm run python testme.py
+
+  fmt:
+    desc: Format code with black
+    cmd: pdm run black .
+
+  install:
+    desc: Install all dependencies
+    cmd: pdm install
