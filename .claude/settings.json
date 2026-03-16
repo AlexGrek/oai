@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdm init:*)",
+      "Bash(pdm add:*)"
+    ]
+  }
+}

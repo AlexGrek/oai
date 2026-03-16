@@ -1,0 +1,21 @@
+[project]
+name = "oai"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "alexgrek", email = "alexgrek.hq@gmail.com"},
+]
+dependencies = ["fastapi>=0.135.1", "uvicorn>=0.41.0", "httpx>=0.28.1", "pydantic>=2.12.5", "python-dotenv>=1.2.2", "python-jose>=3.5.0", "python-multipart>=0.0.22", "PyYAML>=6.0.3", "py-mini-racer>=0.6.0", "colorama>=0.4.6", "requests>=2.32.5"]
+requires-python = "==3.13.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
+
+[dependency-groups]
+dev = [
+    "black>=26.3.1",
+    "uvloop>=0.22.1",
+]
